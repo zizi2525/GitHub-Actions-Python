@@ -39,6 +39,6 @@ jobs:
           azPSVersion: latest
           inlineScript: |
             python -m pip install requests
-            python mypythonscriptPS.py
+            python ../mypythonscriptPS.py
 
 
