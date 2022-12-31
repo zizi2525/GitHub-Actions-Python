@@ -4,7 +4,6 @@ import json
 
 
 SUBSCRIPTION_ID = os.environ["subscription_id"]
-SUBSCRIPTION_ID = os.environ["${{ secrets.subscription_id }}"]
 TENANT_ID = os.environ["tenant_id"]
 RESOURCE_GROUP_NAME = os.environ["rg-videos-name"]
 SYNAPSE_WORKSPACE_NAME = os.environ["synapse_videos_workspace_name"]
