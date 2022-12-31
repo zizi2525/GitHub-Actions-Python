@@ -33,12 +33,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        
+
       - uses: azure/powershell@v1
         with:
           azPSVersion: latest
           inlineScript: |
             python -m pip install requests
-            python mypythonscriptPS.py
+            python GitHub-Actions-Python\mypythonscriptPS.py
 
 
