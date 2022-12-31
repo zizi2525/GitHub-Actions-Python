@@ -63,7 +63,7 @@ jobs:
           cache-dependency-path: requirements.txt
       
       - name: Install Dependencies
-        if: steps.cachesetuppython.outputs.cache-hit != 'true'
+        if: steps.setuppython.outputs.cache-hit != 'true'
         run: pip install -r requirements.txt
 
       - name: Run Python Script
