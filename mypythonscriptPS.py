@@ -12,7 +12,6 @@ CLIENT_SECRET = os.environ["sp-videos-client-secret"]
 
 def main():
     # Acquire an access token
-
     url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/token"
     data = {
             "client_id": CLIENT_ID,
@@ -24,7 +23,11 @@ def main():
     access_token = token_request.json()["access_token"]
 
     # Create the Azure Synapse Integration Runtime
-    url = f"https://management.azure.com/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP_NAME}/providers/Microsoft.Synapse/workspaces/{SYNAPSE_WORKSPACE_NAME}/integrationRuntimes/mynewir3?api-version=2021-06-01-preview"
+    url = (
+        f"https://management.azure.com/subscriptions/{SUBSCRIPTION_ID}/"
+        f"resourceGroups/{RESOURCE_GROUP_NAME}/providers/Microsoft.Synapse/"
+        f"workspaces/{SYNAPSE_WORKSPACE_NAME}/integrationRuntimes/mynewir2?api-version=2021-06-01-preview"
+    )
     headers = {
             "Authorization": f"Bearer {access_token}", 
             "Content-Type": "application/json"

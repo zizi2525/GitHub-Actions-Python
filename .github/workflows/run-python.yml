@@ -74,5 +74,34 @@ jobs:
       - name: Run Python Script
         run:  python mypythonscript.py
 
+  run-python-test2:
+    needs: [run-python, run-python-via-powershell]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python Version ${{ matrix.python-version }}
+        uses: actions/setup-python@v4.3.0
+        with:
+          python-version: '3.10'
+      
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        id: cache2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install Dependencies
+        if: steps.cache2.outputs.cache-hit != 'true'
+        run: pip install -r requirements.txt 
+      
+
+
+
+
+
 
       
