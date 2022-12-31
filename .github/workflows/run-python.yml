@@ -31,6 +31,9 @@ jobs:
   run-python-via-powershell:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
       - uses: azure/powershell@v1
         with:
           azPSVersion: latest
