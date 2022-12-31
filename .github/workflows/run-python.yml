@@ -56,15 +56,18 @@ jobs:
       
       - name: Setup Python Version ${{ matrix.python-version }}
         uses: actions/setup-python@v4.3.0
+        id: setuppython
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
           cache-dependency-path: requirements.txt
-          
+      
+      - name: Install Dependencies
+        if: steps.cachesetuppython.outputs.cache-hit != 'true'
+        run: pip install -r requirements.txt
+
       - name: Run Python Script
-        run: |
-          pip install -r requirements.txt
-          python mypythonscript.py
+        run: python mypythonscript.py
 
 
       
