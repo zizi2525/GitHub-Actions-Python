@@ -29,6 +29,7 @@ jobs:
           python mypythonscript.py
 
   run-python-via-powershell:
+    needs: run-python
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
