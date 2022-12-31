@@ -40,4 +40,28 @@ jobs:
           python -m pip install requests
           python mypythonscriptPS.py
 
+  run-python-multiple-versions:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.8', '3.9', '3.10']
+      fail-fast: false
 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Setup Python Version ${{ matrix.python-version }}
+        uses: actions/setup-python@v4.3.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+          
+      - name: Run Python Script
+        run: |
+          pip install requests
+          python mypythonscript.py
+
+
+      
