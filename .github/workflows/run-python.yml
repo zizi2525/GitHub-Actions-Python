@@ -42,6 +42,7 @@ jobs:
           python mypythonscriptPS.py
 
   run-python-multiple-versions:
+    needs: [run-python, run-python-via-powershell]
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 1
@@ -59,15 +60,19 @@ jobs:
         id: setuppython
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-          cache-dependency-path: requirements.txt
+      
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-python-${{ env.pythonLocation }}
       
       - name: Install Dependencies
-        if: steps.setuppython.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install -r requirements.txt
 
       - name: Run Python Script
-        run: python mypythonscript.py
+        run:  python mypythonscript.py
 
 
       
